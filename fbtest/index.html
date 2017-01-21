@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<script src="js/src/fb.js"></script>  
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<button onclick="getEvents()">Test!</button>
+<button onclick="login()">login!</button>
+<button onclick="logoute()">logout!</button>
+
+
+<div id="status"></div>
+
+</body>
+</html>
