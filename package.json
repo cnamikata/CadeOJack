@@ -1,0 +1,21 @@
+{
+  "name": "cadeojack",
+  "version": "1.0.0",
+  "description": "This is a cool website",
+  "main": "index.js",
+  "dependencies": {
+    "owl.carousel": "^2.2.0",
+    "static-server": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://cnamikata@bitbucket.org/cnamikata/mr-simple.git"
+  },
+  "author": "@cnamikata",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cnamikata/mr-simple#readme"
+}

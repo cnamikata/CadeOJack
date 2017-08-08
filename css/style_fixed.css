@@ -1,0 +1,221 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body, .container{
+  width: 100%; 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  line-height: 1.4;
+}
+
+#map{
+  height:100%;
+  width:100%;
+}
+
+.container{
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  min-height: 20px;
+}
+
+.box_auto {
+  width: 100%;
+  overflow: auto;
+  min-height: 20px;
+}
+.modal_header{
+  /* background-color: orange; */
+  border-style: solid;
+  border-color: #ff7a00;
+}
+.modal_txt{
+  padding: 10px;
+  width: 55%;
+  float:left;
+}
+.modal_img{
+  height: 300px;
+  padding-right: 5px;
+  padding-top:5px;
+  width: 45%;
+  float:right;
+}
+.modal_body{
+  padding: 10px;
+  border-style: solid;
+  border-color: #ff7a00;
+}
+
+.photo{
+  padding:4px;
+  float: left;
+  width: 50%;
+  height: 100%;
+  background-color: #333333;
+}
+
+.info{
+  padding:4px;
+  float:right;
+  width:50%;
+  height: 100%;
+  background-color: #333333;
+}
+
+.owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+  height:100%;
+  -webkit-transform-style: preserve-3d; 
+}
+
+.owl-carousel .owl-item .active .center{
+  border-style: solid;
+  border-color: #ff7a00;
+}
+    
+
+.modal.modal-fixed-footer .modal-content {
+  position: absolute;
+  height: calc(100% - 56px);
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background: #F1F1F1; 
+}
+
+.modal.modal-fixed-footer .modal-footer {
+  position: absolute;
+  bottom: 0;
+  background: orange;
+}
+
+p {
+  display: block;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  color:black;
+}
+
+.modal-content{
+  display:block;
+}
+
+.modal-header{
+  display:inline;
+  width:100%;
+}
+.modal_header_img{
+  width:50%;
+}
+.modal_header_txt{
+}
+
+.modal .modal-content {
+  padding: 0px;
+}
+
+p.title_modal{
+  font-family: 'Anton';
+  font-size: 30px;
+  word-wrap: break-word;
+}
+p.text_modal {
+  font-family: 'Homenaje';
+  font-size: 24px;
+  word-wrap: break-word;
+}
+p.describe_modal {
+  font-family: 'Homenaje';
+  font-size: 18px;
+  word-wrap: break-word;
+  text-align: justify;
+  white-space: pre-line;
+}
+
+p.title {
+  font-family: 'Anton';
+  font-size: 19px;
+  color:orange;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+p.text {
+  font-family: 'Homenaje';
+  font-size: 16px;
+  color:white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+p.text_orange {
+  font-family: 'Homenaje';
+  font-size: 16px;
+  color:orange;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+p.describe {
+  font-family: 'Homenaje';
+  font-size: 17px;
+  color:orange;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.logo {
+  background-color: black;
+  padding-bottom:11px;
+} 
+.input{
+  background-color: black;
+  color: #efefef;
+}
+.buttons {
+  padding: 5px;
+  background-color: black;
+}
+.event_info {
+  background-color: black;
+}
+.event_carousel{
+  background-color: black;
+}
+
+
+
+.gold {
+  background-color: #FFD700;
+}
+.orange {
+  background-color: #F79420;
+}
+.white {
+  background-color: white;
+}
+
