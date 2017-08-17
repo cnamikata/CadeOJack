@@ -34,9 +34,8 @@ function initMap() {
         thread_count=0;
         clearPinPoints(); //Clear pinpoints
         actual_data = []; //Clear all data
-        big_carousel = [];
-        init_pos = 0;
         end_pos = big_carousel_size;
+        JUST_BUILT=0;
         SearchBounds_thread(bound_nw, bound_se);
       }
 	});  
@@ -155,8 +154,6 @@ function pinPoints(array){
     //oms.addMarker(marker);
   }
   actual_markers = new_markers;   
-
-
 }
 
 

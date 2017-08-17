@@ -49,7 +49,7 @@
     if(array.total===0);
       else{
         console.log(array);
-      for(var a=0;a<array.hits.length;a++){
+        for(var a=0;a<array.hits.length;a++){
           actual_data.push(array.hits[a]);
           pinPoint(array.hits[a]);
         } 

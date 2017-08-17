@@ -1,11 +1,12 @@
 var CLEAR_ONCE = 0;
+var JUST_BUILT = 0;
 
 var item_position = 1;
-var small_carousel_size = 3;
-var big_carousel_size = 7;
+var big_carousel_size =10;
 var big_carousel = [];
 var init_pos = 0;
 var end_pos = 0;
+var loco_index = 0;
 
 function init_carousel(){
 	$(document).ready(function(){
@@ -54,46 +55,35 @@ function senseCarousel(){
 		OPEN_MODAL = 0;
 	})
 	owl.on('dragged.owl.carousel', function(event) {
-		console.log(event.item.index);
 		OPEN_MODAL = 1;   
 		if(actual_data.length>=big_carousel_size) {
 			if(SEARCH_===0) {
-				var item_actual = event.item.index-event.item.count;
-				console.log(item_actual);
-				if(item_actual>0){ 	
-					indexToRight();
+				console.log(event.item);
+				console.log(loco_index);
+				if(JUST_BUILT===0){
+					loco_index = event.item.index;
+					JUST_BUILT=1;
 				}
-				else{
-					indexToLeft();
+				if(event.item.index>=loco_index){
+					console.log("Right");
+					loco_index++;
 				}
-				item_position=1;
+				else {
+					console.log("Left");
+					loco_index--;
+				}
+				addNext();
 			}
 		}
 	})
 }
 
-function indexToRight(){
-	if(end_pos>=actual_data.length)end_pos=0;
-	if(init_pos>=actual_data.length)init_pos=0;
-	console.log('Right   <<'+init_pos+'____'+end_pos+'<<');
-	clearCarousel();
-	build_carousel(1);
-	big_carousel.shift(); //removes first element
-	getItemCarousel_(actual_data[end_pos]._id, 1);
-	end_pos++;
-	init_pos++;
-}
-
-function indexToLeft(){
-	init_pos--;
-	end_pos--;
-	if(init_pos===-1){init_pos=actual_data.length-1;}
-	if(end_pos===-1){end_pos=actual_data.length-1;}
-	console.log('Left    >>'+init_pos+'____'+end_pos+'>>');
-	clearCarousel();
-	build_carousel(-1);
-	big_carousel.pop(); //removes last element
-	getItemCarousel_(actual_data[init_pos]._id, 0);
+function addNext(){
+	if(end_pos >= actual_data.length);
+	else{
+		getItemCarousel_(actual_data[end_pos]._id, 1);
+		end_pos++;
+	}
 }
 
 var getItem_= function(id) {
@@ -106,17 +96,13 @@ var getItem_= function(id) {
 	        value.ref.off('value', getData);
 	        value.ref.remove();
 	        if(dat.hits!==null && dat.hits[0]!==undefined){
-	          if(actual_data.length < big_carousel_size) {
-	            if(CLEAR_ONCE===0) { clearCarousel(); CLEAR_ONCE=1; }
-	            small_carousel_size = actual_data.length;
-	            big_carousel.push(dat.hits[0]);
-	            build_carousel_item (dat.hits[0]);
-	          }
-	          else {
-	          	small_carousel_size = 3;
-	            addToBigCarousel(dat.hits[0]);
-	          }
-	          resolve(dat.hits);
+				if(CLEAR_ONCE===0) { clearCarousel(); CLEAR_ONCE=1; }
+				console.log(big_carousel.length);
+	            if(big_carousel.length<big_carousel_size){
+	            	big_carousel.push (dat.hits[0]);
+	            	build_carousel_item (dat.hits[0]);	
+	        	}
+	            resolve(dat.hits);
 	        }
 	        else{
 	          reject(Error("There is no data!"));
@@ -142,8 +128,10 @@ var getItemCarousel_ = function(id, push) {
 	        value.ref.off('value', getData);
 	        value.ref.remove();
 	        if(dat.hits!==null){
-	          if(push===1) big_carousel.push(dat.hits[0]); // at the end
-	          else if(push===0) big_carousel.unshift(dat.hits[0]); //at the beginning
+	          //if(push===1) 
+	          big_carousel.push(dat.hits[0]); // at the end
+	          build_carousel_item(dat.hits[0]);
+	          //else if(push===0) big_carousel.unshift(dat.hits[0]); //at the beginning
 	          resolve(dat.hits);
 	        }
 	        else{
@@ -171,21 +159,11 @@ function makeCarousel(){
 	}
 }
 
-function addToBigCarousel(data){
-	//console.log(data);		
-	if(big_carousel.length<=big_carousel_size) {
-		big_carousel.push(data);
-	}
-	if (big_carousel.length === big_carousel_size) {
-		clearCarousel();
-		build_carousel(0);
-	}	
-}
-
 function clearCarousel(){
-	for(var i = 0 ; i<small_carousel_size*2; i++){
+	for(var i = 0 ; i<big_carousel.length*3; i++){
 		$('.owl-carousel').trigger('remove.owl.carousel',i);
 	}
+	big_carousel = [];
 }
 
 function build_carousel(index){
@@ -251,7 +229,7 @@ function build_carousel_item (data) {
 	event_info.appendChild(box_photo);
 	event_info.appendChild(box_info);
 	$('.owl-carousel').owlCarousel('add', event_info).owlCarousel('update');
-	$('.owl-carousel').trigger('to.owl.carousel', 1);
+	//$('.owl-carousel').trigger('to.owl.carousel', 1);
 }
 
 function build_carousel_item_(data) {

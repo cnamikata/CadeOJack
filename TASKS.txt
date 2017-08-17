@@ -39,3 +39,23 @@ TASKS...................................................................
 * CSS responsive to all sizes
 	- Boxes and modal
 * Correct links inside modal
+
+
+TASKS DONE...................................................................
+
+--MAP--
+
+--CAROUSEL--
+* Correct carousel for many items (it is broken)
+
+--CALENDAR--
+
+--BACKEND--
+
+--SETTINGS--
+
+--ADSENSE--
+
+--SEARCH ENGINE--
+
+--FRONTEND--
