@@ -106,6 +106,7 @@
     height:100%;
 }
 
+/*
 @media screen and (max-width: 1050px) and (max-height: 600px) {
   p.title {
     font-size: 12px;
@@ -131,7 +132,9 @@
     font-size: 12px;
   }
 }
+*/
 
+/* Menos de 1050 px */
 @media screen and (max-width: 1050px){
   .input_field{
     transform: translate(-50%, -78%);
@@ -139,22 +142,23 @@
   .logo { 
     height:10%; width:60%; order:0;
   }
-  .input {
-    height:10%; order:3; 
-  }
   .buttons { 
     height:10%; width:40%; order:1;
   }
-  .event_carousel{
-    height:20%; order:4;
-  }
+
   .gold {
-    height:50%; order:2;
+    height:55%; order:2;
   }
+  .input {
+    height:11%; order:3; 
+  }
+  .event_carousel{
+    height:24%; order:4;
+  }
+
   .orange{
     height:10%; order:5;
   }
-
   p.title_modal{
     font-size: 19px;
   }
@@ -168,7 +172,7 @@
 }
 
 
-/* WIDE SCREEN */
+/* A partir de 1050 px */
 @media screen and (min-width: 1050px) {   
   .input_field{
     transform: translate(-50%, -67%);
@@ -200,5 +204,4 @@
   p.text_modal { font-size: 22px; font-weight: bold; }
   p.describe_modal { font-size: 20px; }
 }
-
 
