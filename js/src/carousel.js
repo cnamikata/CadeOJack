@@ -11,12 +11,12 @@ function init_carousel(){
 	$(document).ready(function(){
 		$('.owl-carousel').owlCarousel({
 		    center:true,
-		    margin:10,
+		    margin:5,
 		    loop:true,
 		    responsive:{
-		        0:{ items:3 },
-		        600:{ items:3 },
-		        1000:{ items:3 }
+		        0:{ items:2 },
+		        600:{ items:2 },
+		        1000:{ items:4 }
 		    }
 		});
 		$('.datepicker').pickadate({

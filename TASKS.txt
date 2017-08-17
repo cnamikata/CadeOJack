@@ -1,0 +1,41 @@
+TASKS...................................................................
+
+--MAP--
+* Apply map style, load from file
+* Jump the kanguru
+* Event focus on the screen
+* Geolocation button?
+	- Maps option inside modal to create path to the event?
+* Test curitiba and login of another master user
+
+--CAROUSEL--
+* Correct carousel for many items (it is broken)
+* Carousel tags? A good way to put all the tags in the website
+
+--CALENDAR--
+* Today
+* Tomorrow
+* Calendar
+
+--BACKEND--
+* Make boot to remove all the old content from FDB
+* Plan the move to AWS cause will stop using local elasticsearch
+
+--SETTINGS--
+* Settings, what to do
+	- User login
+	- Check privacy and public events
+	- About us
+
+--ADSENSE--
+* Adsense content
+
+--SEARCH ENGINE--
+* Make search better (Tags Maybe?)
+
+--FRONTEND--
+* Grunt - minification
+* Nodexpress thing - What is the best option to upload at amazon?
+* CSS responsive to all sizes
+	- Boxes and modal
+* Correct links inside modal
