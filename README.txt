@@ -1,4 +1,8 @@
-﻿
+﻿1. Install elasticsearch
+
+
+
+
 //Instalações
 
 npm -g install static-server

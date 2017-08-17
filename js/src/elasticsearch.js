@@ -124,7 +124,7 @@
     doSearch(CheckDuplicatesQuery_(event.name), function AddRecords(snap) {
       var dat = snap.val();
       if( dat === null ) { return; } // wait until we get data
-      snap.ref.off('value', showResults);
+      //snap.ref.off('value', showResults);
       snap.ref.remove();
       if(dat.hits===undefined){
         if (event.place===undefined) return;
@@ -180,7 +180,7 @@
     for(var i = 0;i<data.length;i++){
         pinPoint(data[i]);
         actual_data.push(data[i]);
-        build_carousel_item (data[i]);
+        build_carousel_item_(data[i]);
     }
     SEARCH_=1;
   }

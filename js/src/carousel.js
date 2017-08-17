@@ -253,3 +253,52 @@ function build_carousel_item (data) {
 	$('.owl-carousel').owlCarousel('add', event_info).owlCarousel('update');
 	$('.owl-carousel').trigger('to.owl.carousel', 1);
 }
+
+function build_carousel_item_(data) {
+	if(data===undefined)return;
+	var event_info = document.createElement('div');
+	event_info.className = "box event_info";
+	event_info.id = data._id;		
+	event_info.onclick = function(){
+		openMyModal_(this.id);
+	};	
+		var box_photo = document.createElement('div');
+		box_photo.className = "box photo";
+			var img = document.createElement('img');
+			img.src = data._source.photo_path;
+			box_photo.appendChild(img);
+		var box_info = document.createElement('div');
+		box_info.className = "box info";
+			var p_title = document.createElement('p');
+			p_title.className = "title";
+			p_title.appendChild(document.createTextNode(data._source.name));
+			var p_place = document.createElement('p');
+			p_place.className = "text_orange";
+			p_place.appendChild(document.createTextNode(data._source.place_name));
+			var p_addr = document.createElement('p');
+			p_addr.className = "text";
+			p_addr.appendChild(document.createTextNode(data._source.street));				
+			var p_init= document.createElement('p');
+			p_init.className = "text";
+			p_init.appendChild(document.createTextNode(data._source.datetime_init+' até'));
+			var p_end = document.createElement('p');
+			p_end.className = "text";
+			p_end.appendChild(document.createTextNode(data._source.datetime_end));
+			var p_site = document.createElement('p');
+			p_site.className = "text";
+			p_site.appendChild(document.createTextNode('Site'));
+			var p_desc = document.createElement('p');
+			p_desc.className = "describe";
+			p_desc.appendChild(document.createTextNode(data._source.description));
+			box_info.appendChild(p_title);	
+			box_info.appendChild(p_place);
+			box_info.appendChild(p_init);
+			box_info.appendChild(p_end);
+			box_info.appendChild(p_addr);
+			//box_info.appendChild(p_site);
+			box_info.appendChild(p_desc);
+	event_info.appendChild(box_photo);
+	event_info.appendChild(box_info);
+	$('.owl-carousel').owlCarousel('add', event_info).owlCarousel('update');
+	$('.owl-carousel').trigger('to.owl.carousel', 1);
+}
