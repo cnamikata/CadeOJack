@@ -35,7 +35,7 @@ function initMap() {
         clearPinPoints(); //Clear pinpoints
         actual_data = []; //Clear all data
         end_pos = big_carousel_size;
-        JUST_BUILT=0;
+        actual_index=0;
         SearchBounds_thread(bound_nw, bound_se);
       }
 	});  
@@ -122,9 +122,12 @@ function refreshData(){
   document.getElementById("built_carousel").appendChild(build_carousel(actual_data));    
 }
 
-function activatePin(actual_pin, last_pin){
-  actual_markers[last_pin].setAnimation(null); 
-  actual_markers[actual_pin].setAnimation(google.maps.Animation.BOUNCE); 
+function jump(apin, lpin){
+  actual_pin = apin;
+  last_pin = lpin;
+  console.log("Jump Kanguru! " + actual_pin + " " + last_pin);
+  markers[last_pin].setAnimation(null); 
+  markers[actual_pin].setAnimation(google.maps.Animation.BOUNCE); 
 }
 
 function pinPoints(array){  
@@ -153,7 +156,7 @@ function pinPoints(array){
     //Overlaping Marker Spider 
     //oms.addMarker(marker);
   }
-  actual_markers = new_markers;   
+  markers = new_markers;   
 }
 
 

@@ -1,12 +1,11 @@
 var CLEAR_ONCE = 0;
-var JUST_BUILT = 0;
-
 var item_position = 1;
 var big_carousel_size =10;
 var big_carousel = [];
 var init_pos = 0;
 var end_pos = 0;
-var loco_index = 0;
+
+var actual_index = 0;
 
 function init_carousel(){
 	$(document).ready(function(){
@@ -39,7 +38,7 @@ function init_carousel(){
 		      complete: function(modal) { 
 		      	var elem = document.getElementById("remove_tag");
 		      	if(elem !== null) elem.parentNode.removeChild(elem);
-		      	DO_NOT_OPEN_MODAL=0;
+		      	OPEN_MODAL=0;
 		      } // Callback for Modal close
 		    }
 		  );
@@ -49,29 +48,39 @@ function init_carousel(){
 }
 
 function senseCarousel(){
+	var start_car = 0;
+	var end_car = 0;
+	var dif_car = 0;
 	var owl = $('.owl-carousel');
 	owl.owlCarousel();
 	owl.on('drag.owl.carousel', function(event) {
+		start_car = event.item.index;
+		//console.log('Start_Car '+ start_car);
 		OPEN_MODAL = 0;
 	})
+	owl.on('translated.owl.carousel', function(event) {
+		OPEN_MODAL = 1;
+	})
 	owl.on('dragged.owl.carousel', function(event) {
-		OPEN_MODAL = 1;   
+		end_car = event.item.index;
+		//console.log('End_Car '+ end_car);
+		if(end_car>start_car){
+			dif_car = end_car - start_car;
+			console.log("Move Left by " + dif_car);
+			actual_index+=dif_car;
+			if(actual_index>=big_carousel.length)actual_index=0;
+			jump(actual_index,actual_pin);
+		}
+		else{
+			dif_car = start_car-end_car;
+			console.log("Move Right " + dif_car);
+			actual_index-=dif_car;
+			if(actual_index<0)actual_index=big_carousel.length-1;
+			jump(actual_index,actual_pin);
+		}
+		console.log("Actual Index " + actual_index);
 		if(actual_data.length>=big_carousel_size) {
 			if(SEARCH_===0) {
-				console.log(event.item);
-				console.log(loco_index);
-				if(JUST_BUILT===0){
-					loco_index = event.item.index;
-					JUST_BUILT=1;
-				}
-				if(event.item.index>=loco_index){
-					console.log("Right");
-					loco_index++;
-				}
-				else {
-					console.log("Left");
-					loco_index--;
-				}
 				addNext();
 			}
 		}
@@ -97,7 +106,7 @@ var getItem_= function(id) {
 	        value.ref.remove();
 	        if(dat.hits!==null && dat.hits[0]!==undefined){
 				if(CLEAR_ONCE===0) { clearCarousel(); CLEAR_ONCE=1; }
-				console.log(big_carousel.length);
+				//console.log(big_carousel.length);
 	            if(big_carousel.length<big_carousel_size){
 	            	big_carousel.push (dat.hits[0]);
 	            	build_carousel_item (dat.hits[0]);	
@@ -151,16 +160,21 @@ var getItemCarousel_ = function(id, push) {
 function makeCarousel(){
 	var loop = big_carousel_size;
 	if(actual_data.length<big_carousel_size) loop = actual_data.length;
-	console.log('Make it for '+ actual_data.length);
+	console.log('Make it to '+ actual_data.length);
 	CLEAR_ONCE=0;
 	for(var i=0;i<loop;i++){
-		console.log(actual_data[i]._id);
+		//console.log(actual_data[i]._id);
 		getItem_(actual_data[i]._id);
 	}
+	jump(0,0);
 }
 
 function clearCarousel(){
-	for(var i = 0 ; i<big_carousel.length*3; i++){
+	var size = 0;
+	if(big_carousel.length===0)size = actual_data.length;
+	else size = big_carousel.length;
+	//console.log('clear for ' + size);
+	for(var i = 0 ; i<size*2; i++){
 		$('.owl-carousel').trigger('remove.owl.carousel',i);
 	}
 	big_carousel = [];
@@ -178,8 +192,9 @@ function build_carousel(index){
 function showme(){
 	//Waits until the last search to clear carousel
 	console.log(actual_data.length);
+	console.log(actual_markers);
 	for(var i = 0 ; i<big_carousel.length ; i++){
-		console.log(big_carousel[i]);
+		//console.log(big_carousel[i]);
 	}
 }
 

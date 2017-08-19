@@ -1,6 +1,5 @@
 var global_data;
 var global_cluster;
-var actual_markers;
 var actual_pin;
 var last_pin;
 var infowindow;

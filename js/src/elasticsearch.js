@@ -45,21 +45,21 @@
     });  
   }
 
-  function getPin(array){
+  function getPin(array) {
     if(array.total===0);
-      else{
-        console.log(array);
-        for(var a=0;a<array.hits.length;a++){
-          actual_data.push(array.hits[a]);
-          pinPoint(array.hits[a]);
-        } 
-      }
-      thread_count++;
-      if(thread_count>=threads){
-        console.log("Get to the end!!!!");
-        makeCarousel();
-        thread_count=0;
-      }
+    else{
+      console.log(array);
+      for(var a=0;a<array.hits.length;a++){
+        actual_data.push(array.hits[a]);
+        pinPoint(array.hits[a]);
+      } 
+    }
+    thread_count++;
+    if(thread_count>=threads){
+      console.log("Get to the end!!!!");
+      makeCarousel();
+      thread_count=0;
+    }
   }
 
   function getById_(id) {
