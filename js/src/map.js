@@ -7,10 +7,19 @@ var threads = 5;
 function initMap() {
 	var gm = google.maps;  
 	var geocoder = new google.maps.Geocoder;
+  
 	map = new gm.Map(document.getElementById('map'), {
 		mapTypeId: gm.MapTypeId.ROADMAP,
-		center: new gm.LatLng(-23.5489, -46.6388), zoom: 16,  // whatevs: fitBounds will overri
+		center: new gm.LatLng(-23.5489, -46.6388), 
+    zoom: 16,  // whatevs: fitBounds will override
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','styled_map']
+    }
 	});
+
+  //Associate the styled map with the MapTypeId and set it to display.
+  map.mapTypes.set('styled_map', styledMapType);
+  map.setMapTypeId('styled_map');
 
 	/* Get Map Bounds */
 	google.maps.event.addListener(map, 'bounds_changed', function(){

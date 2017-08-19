@@ -1,15 +1,12 @@
 TASKS...................................................................
 
 --MAP--
-* Apply map style, load from file
-* Jump the kanguru
 * Event focus on the screen
 * Geolocation button?
 	- Maps option inside modal to create path to the event?
 * Test curitiba and login of another master user
 
 --CAROUSEL--
-* Correct carousel for many items (it is broken)
 * Carousel tags? A good way to put all the tags in the website
 
 --CALENDAR--
@@ -44,6 +41,8 @@ TASKS...................................................................
 TASKS DONE...................................................................
 
 --MAP--
+* Jump the kanguru
+* Apply map style, load from file
 
 --CAROUSEL--
 * Correct carousel for many items (it is broken)
