@@ -7,7 +7,7 @@ var threads = 5;
 function initMap() {
 	var gm = google.maps;  
 	var geocoder = new google.maps.Geocoder;
-  
+
 	map = new gm.Map(document.getElementById('map'), {
 		mapTypeId: gm.MapTypeId.ROADMAP,
 		center: new gm.LatLng(-23.5489, -46.6388), 
@@ -132,11 +132,13 @@ function refreshData(){
 }
 
 function jump(apin, lpin){
-  actual_pin = apin;
-  last_pin = lpin;
-  console.log("Jump Kanguru! " + actual_pin + " " + last_pin);
-  markers[last_pin].setAnimation(null); 
-  markers[actual_pin].setAnimation(google.maps.Animation.BOUNCE); 
+  //console.log("Jump Kanguru! " + actual_pin + " " + last_pin);
+  markers[lpin].setAnimation(null); 
+  markers[apin].setAnimation(google.maps.Animation.BOUNCE); 
+  var search_value = document.getElementById("search_value").value;
+  if(search_value!=="") {
+    map.setCenter(markers[apin].position);
+  }
 }
 
 function pinPoints(array){  

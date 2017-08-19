@@ -12,7 +12,7 @@ var openMyModal_ = function(index) {
 	        value.ref.remove();
 	        if(dat.hits!==null){
 	          //console.log(dat.hits)
-	          OPEN_MODAL=1;
+			  console.log(index+' DONOTOPEN->'+OPEN_MODAL);
 	          document.getElementById("built_modal").appendChild(build_modal(dat.hits[0]._source));    
 			  $('#built_modal').modal('open');
 	          resolve(dat.hits);

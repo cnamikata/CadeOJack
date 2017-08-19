@@ -177,11 +177,26 @@
     big_carousel = [];
     init_pos = 0;
     end_pos = big_carousel_size;
+    actual_index=0;
     for(var i = 0;i<data.length;i++){
+        if(i===0){
+          var latlong =  data[i]._source.location.split(",");
+          var latitude = parseFloat(latlong[0]);
+          var longitude = parseFloat(latlong[1]);
+          var myLatLng = {lat: latitude, lng: longitude}; 
+          map.setCenter(myLatLng);
+          var current_zoom = map.getZoom()-3;
+          if(current_zoom<11)current_zoom=11;
+          map.setZoom(current_zoom);
+        }
         pinPoint(data[i]);
         actual_data.push(data[i]);
+        big_carousel.push(data[i]);
         build_carousel_item_(data[i]);
     }
+    actual_pin = 0;
+    last_pin = 0;
+    jump(actual_pin,last_pin);
     SEARCH_=1;
   }
 

@@ -63,27 +63,38 @@ function senseCarousel(){
 	owl.on('dragged.owl.carousel', function(event) {
 		end_car = event.item.index;
 		//console.log('End_Car '+ end_car);
+		var reference = big_carousel.length-1
+		//console.log('Reference ' + reference);
 		if(end_car>start_car){
 			dif_car = end_car - start_car;
-			console.log("Move Left by " + dif_car);
-			actual_index+=dif_car;
-			if(actual_index>=big_carousel.length){
-				actual_index=0;
-				$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+			if(dif_car>=reference){ //head is backing to tail
+				console.log("Head Move Right by " + dif_car);
+				actual_index-=1;			
+				if(actual_index<0){
+					actual_index=big_carousel.length-1;
+				}
 			}
-			jump(actual_index,actual_pin);
+			else{
+				console.log("Move Left by " + dif_car);
+				actual_index+=1;			
+				if(actual_index>=big_carousel.length){
+					actual_index=0;
+				}
+			}
 		}
 		else{
 			dif_car = start_car-end_car;
 			console.log("Move Right " + dif_car);
-			actual_index-=dif_car;
+			actual_index-=1;
 			if(actual_index<0){
 				actual_index=big_carousel.length-1;
-				$('.owl-carousel').trigger('to.owl.carousel', actual_index);
 			}
-			jump(actual_index,actual_pin);
 		}
-		console.log("Actual Index " + actual_index);
+		last_pin = actual_pin;
+		actual_pin = actual_index;
+		console.log("    Actual Index " + actual_index);
+		$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+		jump(actual_pin,last_pin);			
 		if(actual_data.length>=big_carousel_size) {
 			if(SEARCH_===0) {
 				addNext();
@@ -171,7 +182,9 @@ function makeCarousel(){
 		//console.log(actual_data[i]._id);
 		getItem_(actual_data[i]._id);
 	}
-	jump(0,0);
+	actual_pin = 0;
+	last_pin = 0;
+	jump(actual_pin,last_pin);
 }
 
 function clearCarousel(){
@@ -298,5 +311,5 @@ function build_carousel_item_(data) {
 	event_info.appendChild(box_photo);
 	event_info.appendChild(box_info);
 	$('.owl-carousel').owlCarousel('add', event_info).owlCarousel('update');
-	$('.owl-carousel').trigger('to.owl.carousel', 1);
+	//$('.owl-carousel').trigger('to.owl.carousel', 1);
 }

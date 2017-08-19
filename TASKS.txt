@@ -1,7 +1,6 @@
 TASKS...................................................................
 
 --MAP--
-* Event focus on the screen
 * Geolocation button?
 	- Maps option inside modal to create path to the event?
 * Test curitiba and login of another master user
@@ -41,6 +40,7 @@ TASKS...................................................................
 TASKS DONE...................................................................
 
 --MAP--
+* Event focus on the screen
 * Jump the kanguru
 * Apply map style, load from file
 
