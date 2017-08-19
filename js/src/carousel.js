@@ -38,7 +38,6 @@ function init_carousel(){
 		      complete: function(modal) { 
 		      	var elem = document.getElementById("remove_tag");
 		      	if(elem !== null) elem.parentNode.removeChild(elem);
-		      	OPEN_MODAL=0;
 		      } // Callback for Modal close
 		    }
 		  );
@@ -68,14 +67,20 @@ function senseCarousel(){
 			dif_car = end_car - start_car;
 			console.log("Move Left by " + dif_car);
 			actual_index+=dif_car;
-			if(actual_index>=big_carousel.length)actual_index=0;
+			if(actual_index>=big_carousel.length){
+				actual_index=0;
+				$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+			}
 			jump(actual_index,actual_pin);
 		}
 		else{
 			dif_car = start_car-end_car;
 			console.log("Move Right " + dif_car);
 			actual_index-=dif_car;
-			if(actual_index<0)actual_index=big_carousel.length-1;
+			if(actual_index<0){
+				actual_index=big_carousel.length-1;
+				$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+			}
 			jump(actual_index,actual_pin);
 		}
 		console.log("Actual Index " + actual_index);

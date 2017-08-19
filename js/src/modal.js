@@ -1,4 +1,5 @@
 var OPEN_MODAL = 0;
+var COUNT_OPEN = 0;
 
 var openMyModal_ = function(index) {
 	var promise = new Promise (
@@ -11,6 +12,7 @@ var openMyModal_ = function(index) {
 	        value.ref.remove();
 	        if(dat.hits!==null){
 	          //console.log(dat.hits)
+	          OPEN_MODAL=1;
 	          document.getElementById("built_modal").appendChild(build_modal(dat.hits[0]._source));    
 			  $('#built_modal').modal('open');
 	          resolve(dat.hits);
@@ -35,6 +37,9 @@ function openMyModal(index){
 		var i = getIdByIndex(index);
 		document.getElementById("built_modal").appendChild(build_modal(big_carousel[i]._source));    
 		$('#built_modal').modal('open');
+	}
+	else{
+		OPEN_MODAL=1;
 	}
 }
 
