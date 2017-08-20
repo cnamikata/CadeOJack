@@ -12,6 +12,11 @@ html, body, .container{
 
 html {
   line-height: 1.4;
+  outline:none;
+}
+
+input.middle:focus {
+    outline-width: 0;
 }
 
 #map{
@@ -229,6 +234,7 @@ p.describe {
   background-color: red;
   color: #efefef;
 }
+
 .buttons {
   padding: 5px;
   background-color: blue;

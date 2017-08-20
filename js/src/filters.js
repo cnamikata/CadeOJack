@@ -1,4 +1,17 @@
 
+function today(){
+
+	console.log('today!');
+
+}
+
+function tomorrow(){
+
+
+
+}
+
+
 function filterByDate(array, date, major){
 	var filtered = [];
 	for(var i = 0; i < array.length; i++){ 

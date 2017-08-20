@@ -31,7 +31,7 @@
         var accessToken = response.authResponse.accessToken;
         FB.api('/me',
           'GET',
-          {access_token:accessToken , "fields":"events.limit(500).since(yesterday){name,start_time,end_time,place,interested_count,picture.type(large),description}"},
+          {access_token:accessToken , "fields":"events.limit(5000).since(yesterday){name,start_time,end_time,place,interested_count,picture.type(large),description}"},
           function(response) {
             if(response.events.data.length > 0){
               ScanFacebookResults(response.events.data); 
