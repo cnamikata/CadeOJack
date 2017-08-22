@@ -39,7 +39,7 @@ function initMap() {
   		bound_se = se;
       var search_value = document.getElementById("search_value").value;
       console.log(search_value);
-      if(search_value==="") {
+      if(search_value==="" && TODAY===0 && TOMORROW===0 && CALENDAR===0) {
         thread_count=0;
         clearPinPoints(); //Clear pinpoints
         actual_data = []; //Clear all data

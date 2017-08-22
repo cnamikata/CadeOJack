@@ -8,7 +8,7 @@
   var max_length = 0;
   var read_size = 150;
 
-  var source = ['name','place_name','description','datetime_end','datetime_init','location','photo_path','street', 'links'];
+  var source = ['name','place_name','description','date','interested','datetime_end','datetime_init','location','photo_path','street', 'links'];
   var loc = ['location'];
 
   // Initialize Firebase
@@ -45,6 +45,18 @@
     });  
   }
 
+  function getPinFromDate(array) {
+    if(array.total===0);
+    else{
+      console.log(array);
+      for(var a=0;a<array.hits.length;a++){
+        actual_data.push(array.hits[a]);
+        pinPoint(array.hits[a]);
+      } 
+    }
+    makeCarousel();
+  }
+
   function getPin(array) {
     if(array.total===0);
     else{
@@ -71,6 +83,25 @@
     };    
     var body = query.body = {};
     body.query = { "match_phrase": { "_id": id } }
+    return query;
+  }
+
+  function DateQuery_(start, end) {
+    var query = {
+      size: 500,
+      index: "firebase",
+      type: "Data",
+      _source : source
+    };  
+    var body = query.body = {};
+    body.query = {
+        "range" : {
+            "date" : {
+                "gte" : start,
+                "lte" : end
+            }
+        }
+    }
     return query;
   }
 

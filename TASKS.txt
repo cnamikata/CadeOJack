@@ -5,9 +5,6 @@ TASKS...................................................................
 	- Maps option inside modal to create path to the event?
 * Test curitiba and login of another master user
 
---CAROUSEL--
-* Carousel tags? A good way to put all the tags in the website
-
 --CALENDAR--
 * Today
 * Tomorrow

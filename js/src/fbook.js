@@ -34,6 +34,7 @@
           {access_token:accessToken , "fields":"events.limit(5000).since(yesterday){name,start_time,end_time,place,interested_count,picture.type(large),description}"},
           function(response) {
             if(response.events.data.length > 0){
+              console.log(response.events.data.length);
               ScanFacebookResults(response.events.data); 
             }
             else console.log("No event returned!");
@@ -41,7 +42,6 @@
         );
       } 
     });   
-
   }
 
   function openAllClusters() {

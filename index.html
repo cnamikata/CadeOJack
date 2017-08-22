@@ -66,15 +66,13 @@
       <div class="box buttons">
         <div class="box buttons_panel">
           <div class="box button_today">
-            
-            <input class="btn_today" type="submit" onclick="today();jQuery(this).toggleClass('btn_today_active')" value="">
-
+            <input class="btn_today" id="btntd" type="submit" onclick="today();jQuery(this).toggleClass('btn_today_active')" value="">
           </div>
           <div class="box button_tomorrow">
-            <input class="btn_tomorrow" type="submit" onclick="tomorrow();jQuery(this).toggleClass('btn_tomorrow_active')" value="">
+            <input class="btn_tomorrow" id="btntm" type="submit" onclick="tomorrow();jQuery(this).toggleClass('btn_tomorrow_active')" value="">
           </div>
           <div class="box button_calendar">
-            <input class="btn_calendar" type="submit" onclick="calendar();" value="">
+            <input class="btn_calendar" id="btncl" type="submit" onclick="loadCalendar();jQuery(this).toggleClass('btn_calendar_active')" value="">
           </div>
           <div class="box button_config">
             <input class="btn_config" type="submit" onclick="getEventsFacebook()" value="">

@@ -58,14 +58,14 @@ function senseCarousel(){
 		OPEN_MODAL = 0;
 	})
 	owl.on('translated.owl.carousel', function(event) {
-		OPEN_MODAL = 1;
+		OPEN_MODAL = 0;
 	})
 	owl.on('dragged.owl.carousel', function(event) {
 		end_car = event.item.index;
 		//console.log('End_Car '+ end_car);
 		var reference = big_carousel.length-1
 		//console.log('Reference ' + reference);
-		if(end_car>start_car){
+		if(end_car>start_car) {
 			dif_car = end_car - start_car;
 			if(dif_car>=reference){ //head is backing to tail
 				console.log("Head Move Right by " + dif_car);
@@ -81,25 +81,37 @@ function senseCarousel(){
 					actual_index=0;
 				}
 			}
+			last_pin = actual_pin;
+			actual_pin = actual_index;
+			console.log("    Actual Index " + actual_index);
+			$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+			jump(actual_pin,last_pin);			
+			if(actual_data.length>=big_carousel_size) {
+				if(SEARCH_===0) {
+					addNext();
+				}
+			}
 		}
-		else{
+		else if (end_car<start_car) {
 			dif_car = start_car-end_car;
 			console.log("Move Right " + dif_car);
 			actual_index-=1;
 			if(actual_index<0){
 				actual_index=big_carousel.length-1;
 			}
-		}
-		last_pin = actual_pin;
-		actual_pin = actual_index;
-		console.log("    Actual Index " + actual_index);
-		$('.owl-carousel').trigger('to.owl.carousel', actual_index);
-		jump(actual_pin,last_pin);			
-		if(actual_data.length>=big_carousel_size) {
-			if(SEARCH_===0) {
-				addNext();
+			last_pin = actual_pin;
+			actual_pin = actual_index;
+			console.log("    Actual Index " + actual_index);
+			$('.owl-carousel').trigger('to.owl.carousel', actual_index);
+			jump(actual_pin,last_pin);			
+			if(actual_data.length>=big_carousel_size) {
+				if(SEARCH_===0) {
+					addNext();
+				}
 			}
 		}
+		OPEN_MODAL = 1;
+
 	})
 }
 

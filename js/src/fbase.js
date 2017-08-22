@@ -52,21 +52,29 @@ function linkify(text) {
 	var urlRegex =/((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
 	if(text!==undefined){
 		text.replace(urlRegex, function(url) {
-			links[counter]=url;
-			counter++;
+			if(url!=='gmail.com'){
+				links[counter]=url;
+				counter++;
+			}
 		});
 	}
 	return links;
 }
 
 function PushEventOnFirebase(event) {
-	var data = new Array(13);
+	var data = new Array(15);
 	// url da foto do evento
 	data[0] = event.picture.data.url;
 	// nome do evento
 	data[1] = event.name;
 	// início do evento
-	data[2] = getDataHora(event.start_time);          
+	if(event.start_time !== undefined){
+		// fim do evento
+		data[2] = getDataHora(event.start_time);            
+	}
+	var elastic_date = event.start_time;
+	elastic_date = elastic_date.substring(0,10);    
+	data[13] = elastic_date;
 	// fim do evento
 	if(event.end_time !== undefined){
 		// fim do evento
@@ -79,9 +87,10 @@ function PushEventOnFirebase(event) {
 	data[7] = event.place.location.state; 
 	data[8] = event.place.location.city;
 	data[9] = event.place.location.street;  
-	data[10] = event.description; 
+	data[10] = event.description;
+	data[11] = event.place.name;  
 	data[12] = linkify(data[10]);
-	data[11] = event.place.name; 
+	data[14] = event.interested_count;
 
 	if(data[0]===undefined)data[0]='';
 	if(data[1]===undefined)data[1]='';
@@ -94,6 +103,8 @@ function PushEventOnFirebase(event) {
 	if(data[10]===undefined)data[10]='';  
 	if(data[11]===undefined)data[11]='';
 	if(data[12]===undefined)data[12]='';
+	if(data[13]===undefined)data[13]='';
+	if(data[14]===undefined)data[14]='';
 
 	var ref = firebase.database().ref();
 	ref = ref.child("Events"); //Events
@@ -105,6 +116,8 @@ function PushEventOnFirebase(event) {
 		name: data[1],
 		description: data[10],			
 		location: strloc,			
+		interested:data[14],
+		date: data[13],
 		country: data[6],
 		state: data[7],
 		city: data[8],

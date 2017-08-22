@@ -90,9 +90,9 @@
     outline:none;
     height:100%;
 }
-.btn_calendar:focus  /* use Dot here */
+.btn_calendar_active  /* use Dot here */
 {   
-    background:url(../img/calendar2.png) center no-repeat; background-size: 70% 50%;
+    background:url(../img/calendar3.png) center no-repeat; background-size: 70% 50%;
     width:100%;
     outline:none;
     height:100%;
