@@ -7,7 +7,7 @@ var end_pos = 0;
 
 var actual_index = 0;
 
-function init_carousel(){
+function initCarousel(){
 	$(document).ready(function(){
 		$('.owl-carousel').owlCarousel({
 		    center:true,

@@ -231,13 +231,13 @@ p.describe {
   padding-bottom:11px;
 } 
 .input{
-  background-color: red;
+  background-color: black;
   color: #efefef;
 }
 
 .buttons {
   padding: 5px;
-  background-color: blue;
+  background-color: black;
 }
 .event_info {
   background-color: yellow;

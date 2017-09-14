@@ -1,3 +1,4 @@
+
   "use strict";
   var PATH = "search";
   var d = new Date();
@@ -7,6 +8,7 @@
   var myVar = 0;
   var max_length = 0;
   var read_size = 150;
+  var client = 0;
 
   var source = ['name','place_name','description','date','interested','datetime_end','datetime_init','location','photo_path','street', 'links'];
   var loc = ['location'];
@@ -23,8 +25,61 @@
   firebase.initializeApp(config); 
   var firebase_db = firebase.database();
 
+  function initElasticSearch(){
+    client = new elasticsearch.Client({
+      host: 'search-cadeojack-rte32fsvszltkupp4bwhfibi7i.us-east-1.es.amazonaws.com',
+      log: 'trace'
+    });
+
+    client.ping({
+      requestTimeout: 30000,
+    }, function (error) {
+      if (error) {
+        console.error('elasticsearch cluster is down!');
+      } else {
+        console.log('All is well');
+      }
+    });
+  }
+
+
   var SearchBounds_= function(nw, se) {
     console.log('   Search bounds : '+nw.toString()+' '+se.toString());
+    client.search({
+      index: "firebase_loc",
+      type: "GeoLoc",
+      _source : loc,
+      body:{
+        query:{
+          "bool" : {
+              "filter" : {
+                  "geo_bounding_box" : {
+                      "location" : {
+                          "top_left" : {
+                              "lat" : nw.lat(),
+                              "lon" : nw.lng()
+                          },
+                          "bottom_right" : {
+                              "lat" : se.lat(),
+                              "lon" : se.lng()
+                          }
+                      }
+                  }
+              }
+          }
+        }
+      }
+    }).then(function (resp) {
+        var hits = resp.hits;
+        if(hits!==null) {
+          getPin(hits);
+          resolve(hits.hits);
+        }
+        //console.log(hits);
+    }, function (err) {
+        console.trace(err.message);
+    });
+    /*
     var promise = new Promise (
       function(resolve, reject) {
         doSearch(RectangleQuery_(nw,se), 
@@ -42,7 +97,9 @@
       //filterData(result);
     }).catch(function(err) {
       console.log(err); 
-    });  
+    }); 
+    */
+
   }
 
   function getPinFromDate(array) {
@@ -131,6 +188,7 @@
           }
       }
     }
+    //console.log(query);
     return query;
   }
 
@@ -237,6 +295,18 @@
       type: "Data",
       _source : source
     };
+    if(date_start!==""||date_end!==""){
+      console.log("Oi craudio");
+      var body = query.body = {};
+      body.query = {
+          "range" : {
+              "date" : {
+                  "gte" : date_start,
+                  "lte" : date_end
+              }
+          }
+      }
+    }
     query.q = search_value;  
     return query;
   }
@@ -245,6 +315,6 @@
   function doSearch(query, script) {
     var ref = firebase_db.ref().child(PATH);
     var key = ref.child('request').push(query).key;
-    $('#query').text(JSON.stringify(query, null, 2));
+     $('#query').text(JSON.stringify(query, null, 2));
     ref.child('response/'+key).on('value', script);
   }

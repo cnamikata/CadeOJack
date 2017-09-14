@@ -1,8 +1,9 @@
 
 function init(){
-	init_carousel();
+	initCarousel();
 	initMap();
 	initDatePicker();
+	initElasticSearch();
 }
 
 

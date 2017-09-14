@@ -196,10 +196,10 @@
     height:25%; order:5;
   }
   .gold {
-    height:63%; width:85%; order:3;
+    height:63%; width:100%; order:3;
   }
   .orange{
-    height:63%; width:15%; order:4;
+    height:63%; width:0%; order:4;
   }
 
   p.title { font-size: 20px; }

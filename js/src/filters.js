@@ -3,6 +3,8 @@ var TOMORROW = 0;
 var CALENDAR = 0;
 var $input = 0;
 var picker = 0;
+var date_start = 0;
+var date_end = 0;
 
 jQuery.extend( jQuery.fn.pickadate.defaults, {
     monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
@@ -128,7 +130,9 @@ function tomorrow(){
 	filterAuxiliar();
 }
 
-function filterByDate(date_start, date_end){
+function filterByDate(d_start, d_end){
+	date_start = d_start;
+	date_end = d_end;
 	var promise = new Promise (
       function(resolve, reject) {
         doSearch(DateQuery_(date_start,date_end), 
